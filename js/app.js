@@ -21,7 +21,6 @@ function genNavBar() {
         aElem.textContent = 'Section ' + i
         aElem.classList.add('menu__link')
         aElem.setAttribute('id', 'section-' + i)
-        aElem.href
         liElemt.appendChild(aElem)
         liMenu.appendChild(liElemt)
     }
@@ -44,8 +43,8 @@ btnTopE.addEventListener('click', e => {
 })
 
 // Add class 'active' to section when near top of viewport
-document.addEventListener('scroll', e => {
-    e.preventDefault
+document.addEventListener('scroll', (e) => {
+    e.preventDefault();
 
     // Display Go Top Button when the user scrolls below the fold of the page.
     if (this.scrollY < window.innerHeight) {
@@ -79,7 +78,10 @@ navbar.addEventListener('click', function (e) {
     if (target.nodeName == 'A') {
         const secId = target.getAttribute('id');
         const activeElem = document.querySelector(`[data-nav='${secId}'`);
-        window.scrollTo(0, activeElem.offsetTop + (headerE.classList.contains('fixed_menu') ? headerE.offsetHeight : 0));
+        headerE.classList.remove('fixed_menu')
+        //window.scrollIntoView(activeElem.offsetTop + (headerE.classList.contains('fixed_menu') ? headerE.offsetHeight : 0)); // su dung chinh xac vi tri hon
+        activeElem.scrollIntoView({ behavior: "smooth", block: "start", inline: "center" }); // cho phep hieu ung, smooth
+        headerE.classList.add('fixed_menu')
     }
 })
 
